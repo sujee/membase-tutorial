@@ -4,7 +4,7 @@ import java.net.InetSocketAddress;
 
 import net.spy.memcached.MemcachedClient;
 
-public class MembaseWriteTest
+public class MembaseTest1
 {
     static int MAX = 100;
     static String server = "localhost";
