@@ -1,7 +1,6 @@
 package tutorial;
 
 import java.net.InetSocketAddress;
-
 import net.spy.memcached.MemcachedClient;
 
 /**
@@ -13,9 +12,6 @@ public class MembaseTest2
     static String server = "localhost";
     static int port = 11211;
 
-    /**
-     * @param args
-     */
     public static void main(String[] args) throws Exception
     {
         MemcachedClient cache = new MemcachedClient(new InetSocketAddress(server, port));
@@ -25,7 +21,11 @@ public class MembaseTest2
         for (int i = 0; i < MAX; i++)
         {
             String s = new Integer(i).toString();
-            Object o = cache.set(s, 3600, i);
+            // key : integer converted to String (keys are always string)
+            // time to live : in seconds, 3600 seconds (1h), 0 means no expiration
+            // value : actual integer.  This can be an object.  Our integer will be converted to 'Integer'
+            //         class by 'auto boxing' proess
+            Object o = cache.set(s, 0, i);
             System.out.println("cache put : " + s + " : " + i + ",  result " + o);
         }
         long t2 = System.currentTimeMillis();
